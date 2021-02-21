@@ -6,7 +6,18 @@
   width: 150px;
   height: 50px;
   border-radius: 20px;
+  animation-delay: 3s;
 }
+.active{
+  background-color: rgb(22, 92, 22);
+  color: aliceblue;
+}
+.active,
+.btn-option:hover{
+  cursor: pointer;
+
+}
+
 @media(max-width:300px){
   .btn-option{
     width: 100px;
