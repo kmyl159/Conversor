@@ -5,40 +5,43 @@ import Buttons from './Buttons/Index'
 export default function Conversor() {
   
   const [data,setData] = useState("");
-  var butTo = ('') 
-  var butFor = ('')
+  const [response,setResponse] = useState("");
+  var butIn = ('') 
+  var butTo = ('')
 
   function Verify(props){
-    if(butTo.value === 'Json' && butFor.value === 'Xml'){
-      JsonForXml();
+    if(butIn.value === 'Json' && butTo.value === 'Xml'){
+      setResponse(JsonToXml());
     }
-    if(butTo.value === 'Json' && butFor.value === 'Csv'){
+    if(butIn.value === 'Json' && butTo.value === 'Csv'){
       alert('Formato Csv ainda não implementado')
     }
-    if(butTo.value === 'Xml' && butFor.value === 'Csv'){
+    if(butIn.value === 'Xml' && butTo.value === 'Csv'){
       alert('Formato Csv ainda não implementado')
     }
-    if(butTo.value === 'Xml' && butFor.value === 'Json'){
-      XmlForJson();
+    if(butIn.value === 'Xml' && butTo.value === 'Json'){
+      XmlToJson();
     }
-    if(butTo.value === 'Csv' && butFor.value === 'Xml'){
+    if(butIn.value === 'Csv' && butTo.value === 'Xml'){
       alert('Formato Csv ainda não implementado')
     }
-    if(butTo.value === 'Csv' && butFor.value === 'Json'){
+    if(butIn.value === 'Csv' && butTo.value === 'Json'){
       alert('Formato Csv ainda não implementado')
     }
-    if(butTo.value === butFor.value){
+    if(butIn.value === butTo.value){
       alert('Conversão em formatos iguais')
     }
   }
   
-  function JsonForXml(){
+  function JsonToXml(){
 
   }
-  function XmlForJson(){
+  function XmlToJson(){
 
   }
-
+  function Clear() {
+    setData("")
+  }
 
 
   return (
@@ -48,22 +51,30 @@ export default function Conversor() {
     </div>
     <div className="conversor-container">
       <div className="prev-value-container">
-        <h4 className="to">To</h4>
+        <div className="title-emment">In</div>
         <div className="prev-value">
-          <Buttons onClickVerify={(event)=>{butTo =event}}/>
+          <Buttons onClickVerify={(event)=>{butIn =event}}/>
         </div>
       </div>
-      <textarea className ="value" name="value" value={data}
+      <textarea className ="data" name="value" value={data}
        cols='30' rows='10' onChange={(event)=>setData(event.target.value)}>
       {data}
       </textarea>
       <div className="next-value-container">
-        <h4 className="for">For</h4>
+        <div className="title-emment">To</div>
         <div className="next-value">
-          <Buttons onClickVerify= {(event)=>{butFor =event}}/>
+          <Buttons onClickVerify= {(event)=>{butTo =event}}/>
         </div>
+        <input className='btn-clear' onClick={()=>Clear()} type="button"  value="Clear"/>
       </div>
-      <input onClick={()=>Verify()} type="button" className='btn-convert' value="Coverter"/>
+      </div>
+      <div className="conversor-response">
+      <input className='btn-convert' onClick={()=>Verify()} type="button"  value="Coverter"/>
+      <div className="title-emment response-title">Response</div>
+      <textarea className ="response" name="value" value={response}
+        cols='30' rows='10'>
+      {response}
+      </textarea>
     </div>
    </React.Fragment>
   );
