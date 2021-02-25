@@ -9,10 +9,10 @@ export default function Conversor() {
   const [butIn,setButIn] = useState("");
   const [butTo,setButTo] = useState("");
   var text = ('')
-  
- 
 
   function Verify(){
+    console.log(butIn)
+    console.log(butTo)
     if(butIn === 'Json' && butTo === 'Xml'){
       JsonToXml();
     }
@@ -31,10 +31,10 @@ export default function Conversor() {
     if(butIn === 'Csv' && butTo === 'Json'){
       CsvToJson();
     }
-    if(butIn === undefined){
+    if(butIn === undefined || butIn === ''|| butTo === undefined || butTo === ''){
       alert('Insira 2 opções de conversão')
     }
-    if(butIn === butTo && butIn !== undefined){
+    if(butIn === butTo && butIn !== undefined && butIn !== ''){
       alert('Conversão em formatos iguais')
     }
   }
@@ -48,7 +48,6 @@ export default function Conversor() {
     text =  Empty(text);
     text = text !== '' ? JsonValidate(text): text;
     
-    var lineSplit = Object.entries(text)
     var names = Object.keys(text)
     var value = Object.values(text)
     //motando linha de propiedades

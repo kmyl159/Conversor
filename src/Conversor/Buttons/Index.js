@@ -9,17 +9,17 @@ export default function Buttons(props){
   const butt1 = (
     <button 
     onClick={(event) =>setClasse1(Active(event.target))} 
-    key='Xml' value='Xml' className={classe1} >Xml</button>)
+    name='Xml' value='' className={classe1} >Xml</button>)
     
   const butt2 = (
     <button 
     onClick={(event) =>setClasse2(Active(event.target))} 
-    key='Json' value='Json' className={classe2} >Json</button>)
+    name='Json' value='' className={classe2} >Json</button>)
     
   const butt3 = (
     <button 
     onClick={(event) =>setClasse3(Active(event.target))} 
-    key='Csv' value='Csv' className={classe3} >Csv</button>)
+    name='Csv' value='' className={classe3} >Csv</button>)
 
 function ActiveVerify(){
   if(!butt1.props.className.includes('active')){
@@ -38,7 +38,9 @@ function ActiveVerify(){
 function Active(clas){
     try{
       ActiveVerify()
+      console.log(clas.name)
       clas.className = clas.className.includes('active') ? 'btn-option' : 'btn-option  active'; 
+      clas.value = clas.value === clas.name ? '': clas.name
       props.onClickVerify(clas)
       return clas.className
     }catch(err){
