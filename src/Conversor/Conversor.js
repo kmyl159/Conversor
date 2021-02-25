@@ -11,8 +11,7 @@ export default function Conversor() {
   var text = ('')
 
   function Verify(){
-    console.log(butIn)
-    console.log(butTo)
+    
     if(butIn === 'Json' && butTo === 'Xml'){
       JsonToXml();
     }
@@ -42,6 +41,77 @@ export default function Conversor() {
   function JsonToXml(){
     text =  Empty(text);
     text = text !== '' ? JsonValidate(text): text;
+
+    var names = Object.keys(text)
+    var value = Object.values(text)
+   
+    //motando linha de propiedades
+    var propiedadesXml =['']
+     propiedadesXml[0] = '<?xml version="1.0" encoding="UTF-8" ?>'
+     propiedadesXml[1] = '<root>'
+    var indice = 0
+    var propIndice = 2
+    
+    for(let i = 0; i< value.length; i++){
+      // se Values que contem arrays divide o value em string
+      if(JSON.stringify(value[i]).includes('{')){
+       var valuesSplit = JSON.stringify(value[i]).split('"')
+
+        var buscarPor = [":","{",",","}"]
+        buscarPor.forEach(busca => {
+          let indice = valuesSplit.indexOf(busca);
+          while(indice >= 0){
+              valuesSplit.splice(indice, 1);
+              indice = valuesSplit.indexOf(busca);
+          }
+        });
+        
+        //atribui a string a um objeto
+        const objectValue = {}
+        for(let j =0; j < valuesSplit.length;j++){
+          if(j % 2 ===0){
+            objectValue[valuesSplit[j]] = valuesSplit[j+1]
+          }
+        }
+        //pega as chaves do objeto
+        var objectValueKey = Object.keys(objectValue)
+        var objectValueValue = Object.values(objectValue)
+
+
+        //adiciona propiedades
+        propiedadesXml[propIndice] = "<" +  names[indice] + ">"
+        propIndice++
+        for(let j =0; j < objectValueKey.length;j++){
+        propiedadesXml[propIndice] = 
+        '<' + objectValueKey[j] + ">" + objectValueValue[j] + '</' + objectValueKey[j] + ">"
+        propIndice++
+        }
+        propiedadesXml[propIndice] = "</" +  names[indice] + ">"
+
+
+        indice++
+        propIndice++
+      }else{
+
+        //adiciona propiedades com valores
+       if(names[indice] === names[i]){
+          propiedadesXml[propIndice] = 
+          "<" + names[indice] + ">" + value[indice] + "</" + names[indice] + ">"
+        }
+        //incrementa valores
+        propIndice++
+        indice++
+      }
+      if(indice === value.length){
+        propiedadesXml[14] = "</root>"
+      }
+    }
+    
+    var imprime = ''
+    propiedadesXml.forEach(prop=>{
+      imprime+=prop
+    })
+    setResponse(imprime)
     
   }
   function JsonToCsv(){

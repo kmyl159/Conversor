@@ -86,8 +86,8 @@ body,#root{
 
 .data{
   width: 100% !important;
-  height: 40% !important;
-  font-size: 1rem;
+  height: 50% !important;
+  font-size: 1.2rem;
   border-radius: 20px;
   outline: none;
   border: none;
