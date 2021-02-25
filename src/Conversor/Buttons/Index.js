@@ -38,12 +38,12 @@ function ActiveVerify(){
 function Active(clas){
     try{
       ActiveVerify()
-      console.log(clas.name)
       clas.className = clas.className.includes('active') ? 'btn-option' : 'btn-option  active'; 
-      clas.value = clas.value === clas.name ? '': clas.name
+      clas.value = clas.className.includes('active') === clas.name ? '': clas.name
       props.onClickVerify(clas)
       return clas.className
     }catch(err){
+      clas.value = clas.value === clas.name ? '': clas.name
       console.log(err)
     }
   }
