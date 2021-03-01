@@ -371,8 +371,6 @@ export default function Conversor() {
       //retirando caracters
       props = JSON.stringify(props).split('"')
       props = String(props).split(':')
-      //props = String(props).split('{')
-      //props = String(props).split('}')
       props = String(props).split(',')
       var buscarPor = ['',"  ",null,undefined]
       buscarPor.forEach(busca => {
@@ -515,7 +513,7 @@ export default function Conversor() {
 
 
   return (
-   <React.Fragment>
+   <main className='conversor'>
     <div className="header">
       <h3 >Conversor</h3>
     </div>
@@ -526,27 +524,33 @@ export default function Conversor() {
           <Buttons onClickVerify={(event)=>{setButIn(event.value)}}/>
         </div>
       </div>
-      <textarea className ="data" name="value" value={data}
-                placeholder="Digite o texto para conversão"
-                cols='30' rows='10' onChange={(event)=>setData(event.target.value)}>
-              {data}
-      </textarea>
+      <div className="area">
+        <textarea className ="data" name="value" value={data}
+                  placeholder="Digite o texto para conversão"
+                  cols='30' rows='10' onChange={(event)=>setData(event.target.value)}>
+                {data}
+        </textarea>
+        
+      </div>
       <div className="next-value-container">
         <div className="title-emment">To</div>
         <div className="next-value">
           <Buttons onClickVerify= {(event)=>{setButTo(event.value)}}/>
         </div>
-        <button className='btn-clear' onClick={()=>Clear()}>Clear</button>
       </div>
     </div>
     <div className="conversor-response">
-      <button className='btn-convert' onClick={()=>Verify()}>Converter</button>
-      <div className="title-emment response-title">Response</div>
+      <div className="response-title">Response
+          <div className="clear-convert">
+            <button className='btn-clear' onClick={()=>Clear()}>Clear</button>
+            <button className='btn-convert' onClick={()=>Verify()}>Converter</button>
+         </div>
+      </div>
       <textarea className ="response" name="value" defaultValue={response} cols='30' 
           readOnly={true} rows='10' placeholder="Texto convertido"> 
       </textarea>
     </div>
-   </React.Fragment>
+   </main>
   );
 }
 
