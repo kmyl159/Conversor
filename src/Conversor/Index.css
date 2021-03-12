@@ -21,8 +21,8 @@ html, body,#root,#root>main{
   font-size: 1.2rem;
   color: #119e1cc9;
   background-color:#0e031a ;
-  /* box-shadow: 500px 5px deeppink ;
-  animation: headerShad 2s normal; */
+  box-shadow: 500px 5px deeppink ;
+  animation: headerShad 2s normal; 
   
   margin-bottom: 3vh;
 }
@@ -40,7 +40,7 @@ html, body,#root,#root>main{
   height: 500px;
   border-radius: 20px;
   padding: 10px;
-  filter: drop-shadow(50px 50px black);
+  box-shadow: 30px 30px black ;
   animation: shadContainer 2s normal;
   
   display: flex;
@@ -50,10 +50,8 @@ html, body,#root,#root>main{
   
   margin-left: 4%;
   float: left;
-  z-index: 10;
-  
+  position: relative;
 }
-
 .prev-value-container,
 .next-value-container{
   display: flex;
@@ -102,14 +100,8 @@ html, body,#root,#root>main{
   overflow: auto;
   padding-top: 10px;
   padding-left:20px ;
+}
 
-}
-.data::-webkit-scrollbar,
-.response::-webkit-scrollbar{
- visibility: hidden;
- width: 0;
- height: 0;
-}
 
 .conversor-response{
 
@@ -118,7 +110,7 @@ html, body,#root,#root>main{
   height: 500px;
   border-radius: 20px;
   padding: 10px;
-  filter: drop-shadow(50px 50px black);
+  box-shadow: 30px 30px black ;
   animation: shadContainer 2s normal;
   
   display: flex;
@@ -128,6 +120,7 @@ html, body,#root,#root>main{
   
   margin-right: 4%;
   float: right;
+  position: relative;
 }
 
 .clear-convert{
@@ -216,10 +209,10 @@ html, body,#root,#root>main{
 }
 @keyframes shadContainer{
   0%{
-    filter: drop-shadow(0px 0px rgba(0, 0, 0, 0));
+    box-shadow: 0px 0px transparent;
   }
   100%{
-    filter: drop-shadow(50px 50px black);
+    box-shadow: 30px 30px black ;
   }
 }
 
