@@ -3,11 +3,12 @@ export default class Convert {
   
   JsonToXml(props){
     try {
-      props =  this.Empty(props);
-      props = props !== '' ? this.JsonValidate(props): props;
-      props = this.cleanJson(props)
-      props = this.toXml(props)
-      return props
+      if(props !== ''){
+        props = this.JsonValidate(props);
+        props = this.cleanJson(props)
+        props = this.toXml(props)
+        return props
+      }
     } catch (err) {
       console.log(err)
     }
@@ -15,11 +16,12 @@ export default class Convert {
   }//ok
   JsonToCsv(props){
     try {
-      props =  this.Empty(props);
-      props = props !== '' ? this.JsonValidate(props): props;
-      props = this.cleanJson(props)
-      props = this.toCsv(props)
-      return props
+      if(props!== ''){
+        props = props !== '' ? this.JsonValidate(props): props;
+        props = this.cleanJson(props)
+        props = this.toCsv(props)
+        return props
+      }
     }catch(err){
       console.log(err)
     }
@@ -27,22 +29,24 @@ export default class Convert {
 
   XmlToJson(props){
     try{
-      props = this.Empty(props);
-      props = this.XmlValidate(props)
-      props = this.cleanXML(props)
-      props = this.toJson(props)
-      return props
+      if(props!==''){
+        props = this.XmlValidate(props)
+        props = this.cleanXML(props)
+        props = this.toJson(props)
+        return props
+      }
     }catch(err){
       console.log(err)
     }
   }//ok
   XmlToCsv(props){
     try{
-      props = this.Empty(props)
-      props = this.XmlValidate(props)
-      props = this.cleanXML(props)
-      props = this.toCsv(props) 
-      return props    
+      if(props!==''){
+        props = this.XmlValidate(props)
+        props = this.cleanXML(props)
+        props = this.toCsv(props) 
+        return props    
+      }
     }catch(err){
       console.log(err)
     }
@@ -50,22 +54,24 @@ export default class Convert {
 
   CsvToJson(props){
     try{
-      props  = this.Empty(props);
-      props  = this.CsvValidate(props);
-      props = this.cleanCsv(props)
-      props = this.toJson(props)
-      return props
+      if(props!==''){
+        props  = this.CsvValidate(props);
+        props = this.cleanCsv(props)
+        props = this.toJson(props)
+        return props
+      }
     }catch(err){
       console.log(err)
     }
   }//ok
   CsvToXml(props){
     try{
-      props  = this.Empty(props);
-      props  = this.CsvValidate(props);
-      props = this.cleanCsv(props)
-      props = this.toXml(props)
-      return props
+      if(props!==''){
+        props  = this.CsvValidate(props);
+        props = this.cleanCsv(props)
+        props = this.toXml(props)
+        return props
+      }
     }catch(err){
       console.log(err)
     }
@@ -471,11 +477,5 @@ export default class Convert {
     
     return(Json)
   }//ok
-
-  Empty(props){
-    if(props === ''){
-      alert('Campo de conversão vazio')
-    }
-    return props;
-  }//ok
+ 
 }
