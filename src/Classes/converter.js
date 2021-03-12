@@ -1,102 +1,71 @@
-import React,{useState}from 'react';
-import './Conversor.css'
-import Buttons from './Buttons/Index'
 
-export default function Conversor() {
+export default class Convert {
   
-  const [data,setData] = useState("");
-  const [response,setResponse] = useState("");
-  const [butIn,setButIn] = useState("");
-  const [butTo,setButTo] = useState("");
-  var text = ('')
-
-  function Verify(){
-    
-    if(butIn === 'Json' && butTo === 'Xml'){
-      JsonToXml();
-    }
-    if(butIn === 'Json' && butTo === 'Csv'){
-      JsonToCsv();
-    }
-    if(butIn === 'Xml' && butTo === 'Csv'){
-      XmlToCsv();
-    }
-    if(butIn === 'Xml' && butTo === 'Json'){
-      XmlToJson();
-    }
-    if(butIn === 'Csv' && butTo === 'Xml'){
-      CsvToXml();
-    }
-    if(butIn === 'Csv' && butTo === 'Json'){
-      CsvToJson();
-    }
-    if(butIn === undefined || butIn === ''|| butTo === undefined || butTo === ''){
-      alert('Insira 2 opções de conversão')
-    }
-    if(butIn === butTo && butIn !== undefined && butIn !== ''){
-      alert('Conversão em formatos iguais')
-    }
-  }//ok
-  
-  function JsonToXml(){
+  JsonToXml(props){
     try {
-      text =  Empty(text);
-      text = text !== '' ? JsonValidate(text): text;
-      text = cleanJson(text)
-      toXml(text)
+      props =  this.Empty(props);
+      props = props !== '' ? this.JsonValidate(props): props;
+      props = this.cleanJson(props)
+      props = this.toXml(props)
+      return props
     } catch (err) {
       console.log(err)
     }
     
   }//ok
-  function JsonToCsv(){
+  JsonToCsv(props){
     try {
-      text =  Empty(text);
-      text = text !== '' ? JsonValidate(text): text;
-      text = cleanJson(text)
-      toCsv(text)
+      props =  this.Empty(props);
+      props = props !== '' ? this.JsonValidate(props): props;
+      props = this.cleanJson(props)
+      props = this.toCsv(props)
+      return props
     }catch(err){
       console.log(err)
     }
   }//ok
 
-  function XmlToJson(){
+  XmlToJson(props){
     try{
-      text = Empty(text);
-      text = XmlValidate(text)
-      text = cleanXML(text)
-      toJson(text)
+      props = this.Empty(props);
+      props = this.XmlValidate(props)
+      props = this.cleanXML(props)
+      props = this.toJson(props)
+      return props
     }catch(err){
       console.log(err)
     }
   }//ok
-  function XmlToCsv(){
+  XmlToCsv(props){
     try{
-      text = Empty(text)
-      text = XmlValidate(text)
-      text = cleanXML(text)
-      toCsv(text)     
+      props = this.Empty(props)
+      props = this.XmlValidate(props)
+      props = this.cleanXML(props)
+      props = this.toCsv(props) 
+      return props    
     }catch(err){
       console.log(err)
     }
   }//ok
 
-  function CsvToJson(){
+  CsvToJson(props){
     try{
-      text  = Empty(text);
-      text  = CsvValidate(text);
-      text = cleanCsv(text)
-      toJson(text)
+      props  = this.Empty(props);
+      props  = this.CsvValidate(props);
+      props = this.cleanCsv(props)
+      props = this.toJson(props)
+      return props
     }catch(err){
       console.log(err)
     }
   }//ok
-  function CsvToXml(){
+  CsvToXml(props){
     try{
-      text  = Empty(text);
-      text  = CsvValidate(text);
-      text = cleanCsv(text)
-      toXml(text)
+      props  = this.Empty(props);
+      props  = this.CsvValidate(props);
+      props = this.cleanCsv(props)
+      props = this.toXml(props)
+      return props
     }catch(err){
       console.log(err)
     }
@@ -104,7 +73,7 @@ export default function Conversor() {
 
 
 
-  function cleanXML(props){
+  cleanXML(props){
     try{
       //retirando caracters
       props = props.split(">")
@@ -176,7 +145,7 @@ export default function Conversor() {
       console.log(err)
     }
   }//ok
-  function XmlValidate(props){
+  XmlValidate(props){
     if(props.includes('<?xml version="1.0" encoding="UTF-8" ?>')&&
       props.includes('</root>')&&
       props.includes('<root>')){
@@ -185,7 +154,7 @@ export default function Conversor() {
         alert('Xml não é válido')
       }
   }//ok
-  function toXml(props){
+  toXml(props){
     var XmlNames = []
     var XmlValues = []
     var Xml = []
@@ -230,11 +199,11 @@ export default function Conversor() {
     response += Xml
     response = response.replaceAll(',','')
 
-    setResponse(response)
+   return response
   }//ok
 
 
-  function cleanCsv(props) {
+  cleanCsv(props) {
     try{
       //retirando caracteres
       props = props.split('"')
@@ -293,7 +262,7 @@ export default function Conversor() {
       console.log(err)
     }
   }//ok
-  function CsvValidate(props){
+  CsvValidate(props){
     if( props.includes('"')&&
         props.includes(',')){
       return props
@@ -301,7 +270,7 @@ export default function Conversor() {
       alert('Csv não é válido')
     }
   }//ok
-  function toCsv(props){
+  toCsv(props){
     //variaveis de modificação
     var CsvNames = []
     var CsvValues = []
@@ -361,12 +330,16 @@ export default function Conversor() {
     CsvV.forEach(value =>{
       Csv[1] += value 
     })
+    
+    var response = ''
+    response += Csv[0]
+    response += Csv[1]
 
-    setResponse(Csv)
+   return response
   }//ok
 
 
-  function cleanJson(props){
+  cleanJson(props){
     try {
       //retirando caracters
       props = JSON.stringify(props).split('"')
@@ -436,7 +409,7 @@ export default function Conversor() {
       console.log(err)
     }
   }//ok
-  function JsonValidate(props){
+  JsonValidate(props){
     try{
       var jsonLocal = JSON.parse(props)
     }catch(err){
@@ -444,7 +417,7 @@ export default function Conversor() {
     }
     return jsonLocal
   }//ok
-  function toJson(props){
+  toJson(props){
     //variaveis de modificação
     var JsonNames = []
     var JsonValues = []
@@ -496,61 +469,13 @@ export default function Conversor() {
     }
 
     
-    setResponse(Json)
+    return(Json)
   }//ok
 
-
-  function Empty(props){
-    props = data;
+  Empty(props){
     if(props === ''){
       alert('Campo de conversão vazio')
     }
     return props;
   }//ok
-  function Clear() {
-    setData("")
-  }//ok
-
-
-  return (
-   <main className='conversor'>
-    <div className="header">
-      <h3 >Conversor</h3>
-    </div>
-    <div className="conversor-container">
-      <div className="prev-value-container">
-        <div className="title-emment">In</div>
-        <div className="prev-value">
-          <Buttons onClickVerify={(event)=>{setButIn(event.value)}}/>
-        </div>
-      </div>
-      <div className="area">
-        <textarea className ="data" name="value" value={data}
-                  placeholder="Digite o texto para conversão"
-                  cols='30' rows='10' onChange={(event)=>setData(event.target.value)}>
-                {data}
-        </textarea>
-        
-      </div>
-      <div className="next-value-container">
-        <div className="title-emment">To</div>
-        <div className="next-value">
-          <Buttons onClickVerify= {(event)=>{setButTo(event.value)}}/>
-        </div>
-      </div>
-    </div>
-    <div className="conversor-response">
-      <div className="response-title">Response
-          <div className="clear-convert">
-            <button className='btn-clear' onClick={()=>Clear()}>Clear</button>
-            <button className='btn-convert' onClick={()=>Verify()}>Converter</button>
-         </div>
-      </div>
-      <textarea className ="response" name="value" defaultValue={response} cols='30' 
-          readOnly={true} rows='10' placeholder="Texto convertido"> 
-      </textarea>
-    </div>
-   </main>
-  );
 }
-

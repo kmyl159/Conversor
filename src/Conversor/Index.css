@@ -50,8 +50,10 @@ html, body,#root,#root>main{
   
   margin-left: 4%;
   float: left;
+  z-index: 10;
   
 }
+
 .prev-value-container,
 .next-value-container{
   display: flex;
@@ -100,8 +102,14 @@ html, body,#root,#root>main{
   overflow: auto;
   padding-top: 10px;
   padding-left:20px ;
-}
 
+}
+.data::-webkit-scrollbar,
+.response::-webkit-scrollbar{
+ visibility: hidden;
+ width: 0;
+ height: 0;
+}
 
 .conversor-response{
 
