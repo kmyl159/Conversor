@@ -180,6 +180,9 @@ export default class Convert {
     
     //montando array
     for(let i = 0; i < XmlNames.length ;i++){
+      if(XmlValues[i] === ''){
+        var lastEmpty = i
+      }
       //imprime tabulação
       if(i > lastEmpty && XmlNames[i] !== '' && XmlValues[i] !== '' ){
         Xml.push(`\t\t\t<${XmlNames[i]}>${XmlValues[i]}</${XmlNames[i]}>\n`)
@@ -187,7 +190,6 @@ export default class Convert {
         Xml.push(`\t\t<${XmlNames[i]}>${XmlValues[i]}</${XmlNames[i]}>\n`)
       }else{
         Xml.push(`\t\t<${XmlNames[i]}>\n`)
-        var lastEmpty = i
 
         for(let j = i+ 1; j < XmlNames.length ;j++){
           if(XmlValues[j] === '' && XmlValues[i] === XmlValues[j]){
