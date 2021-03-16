@@ -11,25 +11,36 @@
 }
 
 html, body,#root,#root>main{
-  width: 100% !important;
-  height: 100%;
+  min-width: 100% !important;
+  min-height: 100%;
   background-color: #1a0531;
 }
 .header{
-  width: 100% !important;
+  width: 100%;
   padding: 30px;
   font-size: 1.2rem;
   color: #119e1cc9;
   background-color:#0e031a ;
-  box-shadow: 500px 5px deeppink ;
-  animation: headerShad 2s normal; 
+  transition-duration: 1s;
   
   margin-bottom: 3vh;
+  position: relative;
+}
+.header-shadow{
+  display: block;
+  animation: headerShadow 2s normal; 
+  background-color: deeppink;
+  width: 50%;
+  height: 4px;
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
 }
 .header:after{
   position: absolute;
   content: '';
-  width:  300px;
+  width:150px;
   height: 4px;
   background-color: deeppink;
   animation: titleAfter 2s normal;
@@ -185,7 +196,7 @@ html, body,#root,#root>main{
     background-color:green ;
   }
   100%{
-    width: 300px;
+    
     background-color:deeppink ;
   }
 }
@@ -199,12 +210,14 @@ html, body,#root,#root>main{
     background-color:deeppink ;
   }
 }
-@keyframes headerShad{
+@keyframes headerShadow{
   0%{
-    box-shadow: 0px 0px;
+    width: 0;
+    background-color: green;
   }
   100%{
-    box-shadow: 500px 5px deeppink;
+    
+    background-color: deeppink;
   }
 }
 @keyframes shadContainer{
@@ -245,13 +258,18 @@ html, body,#root,#root>main{
   }
 }
 @media(max-width: 785px ){
+  
   .conversor-response,
   .conversor-container{
     height: 95vh;
-    width: 60vw;
+    width: 80vw;
     margin: auto;
     margin-top: 2vh;
     float: none;
+  }
+  .conversor-response{
+    height: 75vh;
+    margin-bottom: 50px;
   }
 }
 @media(max-width: 590px ){

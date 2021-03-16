@@ -50,6 +50,7 @@ export default function Conversor() {
    <main className='conversor'>
     <div className="header">
       <h3 >Conversor</h3>
+      <span className='header-shadow'></span>
     </div>
     <div className="conversor-container">
       <div className="prev-value-container">
